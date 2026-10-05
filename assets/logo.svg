@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 650" width="100%" height="100%">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="strawGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EF4444"/>
+      <stop offset="100%" stop-color="#DC2626"/>
+    </linearGradient>
+    
+    <linearGradient id="pinkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EE1C52"/>
+      <stop offset="100%" stop-color="#D91B4B"/>
+    </linearGradient>
+
+    <linearGradient id="orangeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F78B68"/>
+      <stop offset="100%" stop-color="#EA6F49"/>
+    </linearGradient>
+
+    <linearGradient id="yellowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FACC15"/>
+      <stop offset="100%" stop-color="#EAB308"/>
+    </linearGradient>
+
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00A651"/>
+      <stop offset="100%" stop-color="#008741"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Cup Green Outer Outline (U-Shape) -->
+  <path d="M 120 150 L 120 320 C 120 380, 160 410, 220 410 L 270 410 C 330 410, 370 380, 370 320 L 370 150" 
+        fill="none" stroke="#00A651" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Cup Handle Right (Green) -->
+  <path d="M 370 200 C 440 200, 440 330, 370 330" 
+        fill="none" stroke="#00A651" stroke-width="28" stroke-linecap="round"/>
+
+  <!-- Straw Red -->
+  <path d="M 320 100 L 250 140 L 250 220" 
+        fill="none" stroke="url(#strawGrad)" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Inner Liquid Layers -->
+  <!-- Layer 1: Pink (Top) -->
+  <path d="M 160 190 Q 245 205, 330 215 L 325 255 Q 242 245, 163 230 Z" fill="url(#pinkGrad)"/>
+  
+  <!-- Layer 2: Orange (Upper Middle) -->
+  <path d="M 164 235 Q 243 250, 324 260 L 320 295 Q 241 285, 167 270 Z" fill="url(#orangeGrad)"/>
+
+  <!-- Layer 3: Yellow (Lower Middle) -->
+  <path d="M 168 275 Q 240 290, 319 300 L 314 335 Q 238 325, 172 310 Z" fill="url(#yellowGrad)"/>
+
+  <!-- Layer 4: Green (Bottom Layer) -->
+  <path d="M 173 315 Q 237 330, 313 340 L 303 375 C 275 390, 215 390, 185 375 Z" fill="url(#greenGrad)"/>
+
+  <!-- Typography: mazaz -->
+  <g fill-rule="evenodd" font-family="'Tajawal', 'Arial', sans-serif" font-weight="900" font-size="95">
+    <!-- m (Pink) -->
+    <text x="85" y="520" fill="#EE1C52">m</text>
+    <!-- a (Green) -->
+    <text x="180" y="520" fill="#00A651">a</text>
+    <!-- z (Orange) -->
+    <text x="250" y="520" fill="#EA6F49">z</text>
+    <!-- a (Green) -->
+    <text x="325" y="520" fill="#00A651">a</text>
+    <!-- z (Orange) -->
+    <text x="395" y="520" fill="#EA6F49">z</text>
+  </g>
+</svg>
