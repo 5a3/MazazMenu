@@ -693,7 +693,7 @@ body {
     margin-top: 6px;
     padding-top: 10px;
     border-top: 1px solid var(--border-color);
-    font-size: 0.88rem;
+    font-size: 0.70rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -702,7 +702,7 @@ body {
 }
 
 .dev-link {
-    color: #00A651;
+    color: #19173c;
     background: rgba(0, 166, 81, 0.08);
     padding: 4px 14px;
     border-radius: 20px;
