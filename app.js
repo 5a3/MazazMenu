@@ -14,6 +14,9 @@ if (!firebase.apps.length) {
 
 const db = firebase.firestore();
 
+// Enable Firestore offline persistence for ultra-fast local cache reads
+db.enablePersistence({ synchronizeTabs: true }).catch(() => {});
+
 // Application State
 let categories = [];
 let products = [];
@@ -33,7 +36,7 @@ const modalProductDetails = document.getElementById('modalProductDetails');
 const closeModalBtn = document.getElementById('closeModalBtn');
 
 // ==========================================
-// 2. Smart Local Caching System for Customers
+// 2. Ultra-Low Read Smart Cache System (0 to 1 Read)
 // ==========================================
 function setLocalCache(key, data) {
     try {
@@ -57,17 +60,17 @@ async function loadMenuSmartly() {
     const cachedProducts = getLocalCache('products');
     const localSyncTime = parseInt(localStorage.getItem('mazaz_customer_sync') || '0');
 
-    // Step 1: Render immediately from cache if available (0 ms wait time for customer)
+    // 1. Render instantly from local cache (0 Reads & 0ms loading time for Customer)
     if (cachedCategories && cachedProducts) {
         categories = cachedCategories;
         products = cachedProducts;
         renderCategoriesNav();
         renderMenu();
-        updateStatusUI('منيو محدّث (مستخرج من الكاش السريع)', 'cached');
+        updateStatusUI('منيو محدّث (سريع جداً من الكاش المحلي)', 'cached');
     }
 
     try {
-        // Step 2: Query ONLY ONE document metadata to check if menu was edited in Admin Panel (1 Read)
+        // 2. Single Document Meta Read (Check if Admin updated anything on server)
         const metaDoc = await db.collection('system_metadata').doc('version').get();
         let serverSyncTime = 0;
 
@@ -75,9 +78,9 @@ async function loadMenuSmartly() {
             serverSyncTime = metaDoc.data().last_updated_at.toMillis();
         }
 
-        // Step 3: Check timestamp - Fetch fresh data ONLY if admin modified something
+        // 3. Fetch full collection ONLY if server version is newer than local cache
         if (!cachedCategories || !cachedProducts || serverSyncTime > localSyncTime) {
-            updateStatusUI('جاري استجلاب أحدث المنيو من السيرفر...', 'syncing');
+            updateStatusUI('جاري تحديث بيانات المنيو من السيرفر...', 'syncing');
             await fetchFreshMenuFromFirebase();
             localStorage.setItem('mazaz_customer_sync', (serverSyncTime || Date.now()).toString());
             updateStatusUI('تم تحديث المنيو من السيرفر بنجاح', 'fresh');
@@ -92,7 +95,6 @@ async function loadMenuSmartly() {
 
 async function fetchFreshMenuFromFirebase() {
     try {
-        // Fetch categories and products without compound index requirements
         const [catSnapshot, prodSnapshot] = await Promise.all([
             db.collection('categories').get(),
             db.collection('products').get()
